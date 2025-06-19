@@ -1,7 +1,7 @@
 class Takeaway:
     def __init__(self):
         self.menu = [] # list of dishes with prices
-        self.active_customers = [] # list of customers currently ordering
+        self.current_customer = None # list of customers currently ordering
     
     # takeaway methods
     def add_dish_to_menu(self, name, price):
@@ -14,7 +14,15 @@ class Takeaway:
 
     def calc_total(self, items):
         # calculate total of all items ordered
-
+        pass
+    
+    def add_customer(self, customer):
+        # self.current_customer = customer
+        pass
+    
+    def remove_customer(self, name):
+        pass
+    
     # customer methods 
     def list_dishes(self):
         # return a list of dishes with prices
