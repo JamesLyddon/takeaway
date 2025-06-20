@@ -79,7 +79,7 @@ def test_get_total(takeaway, customer_1):
     takeaway.take_order('actually an order of orange chicken too!')
     assert takeaway.current_customer.get_total() == 15.50
 
-def test_receipt(takeaway, customer_1, dish_1, dish_2, dish_3):
+def test_receipt(takeaway, customer_1):
     takeaway.add_customer(customer_1)
     takeaway.take_order('plain rice and chow mein')
     assert takeaway.get_receipt() == ("1 x chow mein | £5.50\n1 x plain rice | £2.50\ntotal: £8.00\n")
