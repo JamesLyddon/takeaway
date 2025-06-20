@@ -21,7 +21,6 @@ class Takeaway:
         return self.menu
 
     def take_order(self, string_order):
-        # select some number of several available dishes
         for item in self.menu:
             if item.name in string_order:
                 self.current_customer.add_order(item)
