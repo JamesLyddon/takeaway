@@ -16,3 +16,6 @@ class Dish:
 
     def __repr__(self):
         return f"Dish(name={self.name!r}, price={self.price})"
+    
+    def __str__(self):
+        return f"1 x {self.name} | £{self.price:,.2f}"

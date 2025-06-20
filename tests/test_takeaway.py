@@ -86,6 +86,20 @@ def test_receipt(takeaway, customer_1):
     takeaway.take_order('actually an order of orange chicken too!')
     assert takeaway.get_receipt() == ("1 x chow mein | £5.50\n1 x plain rice | £2.50\n1 x orange chicken | £7.50\ntotal: £15.50\n")
 
+def test_no_customer(takeaway, customer_1, customer_2):
+    with pytest.raises(Exception, match="No customer added yet."):
+        takeaway.remove_customer()
+    with pytest.raises(Exception, match="No customer added yet."):
+        takeaway.take_order('plain rice and chow mein')
+    with pytest.raises(Exception, match="No customer added yet."):
+        takeaway.get_receipt()
+    takeaway.add_customer(customer_1)
+    with pytest.raises(Exception, match="already serving a customer!"):
+        takeaway.add_customer(customer_2)
+    with pytest.raises(Exception, match="already serving a customer!"):
+        takeaway.add_customer(customer_2)
+
+
 # TODO add ability to order multiple of same dish
 # TODO add texting mocking
 # TODO consider __repr__ classes to aid output for ux
