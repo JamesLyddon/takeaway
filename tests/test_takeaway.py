@@ -64,8 +64,30 @@ def test_remove_customer(takeaway, customer_1):
     assert takeaway.current_customer == customer_1
     takeaway.remove_customer()
     assert takeaway.current_customer is None
-    
-# TODO keep testing driving Takeaway.py
+
+def test_take_order(takeaway, customer_1, dish_1, dish_2, dish_3):
+    takeaway.add_customer(customer_1)
+    takeaway.take_order('plain rice and chow mein')
+    assert takeaway.current_customer.get_order() == [dish_1, dish_3]
+    takeaway.take_order('actually an order of orange chicken too!')
+    assert takeaway.current_customer.get_order() == [dish_1, dish_3, dish_2]
+
+def test_get_total(takeaway, customer_1):
+    takeaway.add_customer(customer_1)
+    takeaway.take_order('plain rice and chow mein')
+    assert takeaway.current_customer.get_total() == 8.00
+    takeaway.take_order('actually an order of orange chicken too!')
+    assert takeaway.current_customer.get_total() == 15.50
+
+def test_receipt(takeaway, customer_1, dish_1, dish_2, dish_3):
+    takeaway.add_customer(customer_1)
+    takeaway.take_order('plain rice and chow mein')
+    assert takeaway.get_receipt() == ("1 x chow mein | £5.50\n1 x plain rice | £2.50\ntotal: £8.00\n")
+    takeaway.take_order('actually an order of orange chicken too!')
+    assert takeaway.get_receipt() == ("1 x chow mein | £5.50\n1 x plain rice | £2.50\n1 x orange chicken | £7.50\ntotal: £15.50\n")
+
+# TODO add ability to order multiple of same dish
+# TODO add texting mocking
 # TODO consider __repr__ classes to aid output for ux
 # TODO add functions to take input from user to view menu, take order etc. (main.py?)
 # TODO add try except error handling

@@ -9,10 +9,6 @@ class Takeaway:
 
     def remove_dish_from_menu(self, name):
         self.menu = [dish for dish in self.menu if dish.get_name() != name]
-
-    def calc_total(self, items):
-        # calculate total of all items ordered
-        pass
     
     def add_customer(self, customer):
         self.current_customer = customer
@@ -24,13 +20,19 @@ class Takeaway:
     def show_menu(self):
         return self.menu
 
-    def place_order(self):
+    def take_order(self, string_order):
         # select some number of several available dishes
-        pass
+        for item in self.menu:
+            if item.name in string_order:
+                self.current_customer.add_order(item)
 
     def get_receipt(self):
         # return itemised receipt of meals ordered with prices
-        pass
+        receipt = ''
+        for item in self.current_customer.get_order():
+            receipt += f"1 x {item.name} | £{item.price:,.2f}\n"
+        receipt += f"total: £{self.current_customer.get_total():,.2f}\n"
+        return receipt
 
     def send_confirmation_txt(self):
         # confirm the order with a sms txt using twillo api and time.time to estimate delivery
